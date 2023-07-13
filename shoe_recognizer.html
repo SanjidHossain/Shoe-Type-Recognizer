@@ -2,24 +2,316 @@
 title: Shoe type Recognizer
 layout: Page
 ---
-<input id="photo" type="file">
-<div id="results"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+    <style>
+        .image-box {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-<script>
-async function loaded(reader) {   
-    const response = await fetch("https://sanjid-shoe-type-recognizer.hf.space/run/predict", {
-        method: "POST", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({data: [reader.result]})});
-    const json = await response.json();
-    const label = json['data'][0]['label'];
-    results.innerHTML = `<br/> <img src = "${reader.result}" width="500"> <p>${label}</p>`;
-    }
-    function read() {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => loaded(reader))
-        reader.readAsDataURL(photo.files[0]);
-    }
-    photo.addEventListener('input', read);
+        #selected-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin-bottom: 10px;
+        }
 
-</script>
+        #results-box {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #results-label {
+            font-weight: bold;
+        }
+
+        #results-text {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #pros-cons-box {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #pros-label,
+        #cons-label {
+            font-weight: bold;
+        }
+        #pros-list,
+        #cons-list {
+            list-style-type: disc;
+            text-align: left;
+            margin: 10px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="image-box">
+            <label for="photo" id="image-label">Select an image:</label>
+            <br>
+            <input id="photo" type="file">
+            <br>
+            <img id="selected-image" src="" alt="Selected Image">
+        </div>
+        <div id="results-box">
+            <label id="results-label" for="results">Results:</label>
+            <br>
+            <span id="results-text">This is </span>
+            <span id="results"></span>
+        </div>
+        <div id="pros-cons-box">
+            <label id="pros-label" for="pros-list">Pros:</label>
+            <ul id="pros-list"></ul>
+            <label id="cons-label" for="cons-list">Cons:</label>
+            <ul id="cons-list"></ul>
+        </div>
+        <div class="button-container">
+            <button id="submit-button">submit</button>
+            <button id="clear-button">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        async function loaded(reader) {
+            const response = await fetch("https://sanjid-shoe-type-recognizer.hf.space/run/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data: [reader.result] })
+            });
+            const json = await response.json();
+            const label = json['data'][0]['label'];
+            selectedImage.src = reader.result;
+            results.innerText = label;
+            showProsAndCons(label);
+        }
+
+        function read() {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => loaded(reader));
+            reader.readAsDataURL(photo.files[0]);
+        }
+
+        function submit() {
+            read();
+        }
+
+        function clear() {
+            photo.value = '';
+            selectedImage.src = '';
+            results.innerText = '';
+            clearProsAndCons();
+        }
+
+        function showProsAndCons(label) {
+            const prosList = document.getElementById('pros-list');
+            const consList = document.getElementById('cons-list');
+
+            let pros = [];
+            let cons = [];
+
+            if (label === 'Army boots') {
+                pros = ['Durable, Sturdy design, Suitable for outdoor activities'];
+                cons = ['Heavy, Less breathable'];
+            } 
+            else if (label === 'Ballet flats') {
+                pros = ['Comfortable, Versatile, Elegant'];
+                cons = ['Less support, Less cushioning'];
+            } 
+            else if (label === 'Basketball shoes'){
+                pros = ['Excellent grip, Shock absorption, Ankle support'];
+                cons = [' Bulky and Less flexible'];
+            }  
+            else if ( label === 'Brogues'){
+                pros = ['Stylish, Classic design, Versatile'];
+                cons = [' Less cushioning, Not suitable for athletic activities'];
+            }
+            else if ( label === 'Chelsea Boot'){
+                pros = ['Stylish, Easy to slip on and off, Versatile'];
+                cons = ['Limited ankle support, Less suitable for rigorous activities'];
+            }
+            else if ( label === 'Chuck Taylor'){
+                pros = ['Iconic design, Versatile, Comfortable'];
+                cons = ['Limited support, Less cushioning'];
+            }
+            else if ( label === 'Climbing shoes'){
+                pros = ['Excellent grip, Precise fit, Enhanced sensitivity'];
+                cons = ['Uncomfortable for walking long distances, Not suitable for casual wear'];
+            }
+            else if ( label === 'Cone heels'){
+                pros = ['Fashionable, Unique design, Adds height'];
+                cons = ['Less stability, Can be uncomfortable for extended wear'];
+            }
+            else if ( label === 'Court shoes'){
+                pros = ['Versatile, Suitable for formal occasions, Comfortable'];
+                cons = [' Limited support, Less cushioning'];
+            }
+            else if ( label === 'Cowboy boots'){
+                pros = ['Western style, Sturdy construction, Durable'];
+                cons = ['May require a break-in period, Not suitable for all outfits'];
+            }
+            else if ( label === 'Derby shoes'){
+                pros = ['Classic design, Versatile, Suitable for both formal and casual wear'];
+                cons = ['Less ankle support, Limited cushioning'];
+            }
+            else if ( label === 'Dress shoe'){
+                pros = ['Formal and elegant, Versatile, Suitable for special occasions'];
+                cons = [' Less comfort for long hours, Less suitable for casual wear'];
+            }
+            else if ( label === 'Flip flop'){
+                pros = ['Lightweight, Easy to slip on and off, Suitable for beach or poolside'];
+                cons = ['Limited support, No protection for toes'];
+            }
+            else if ( label === 'Golf shoes'){
+                pros = ['Excellent traction, Stability, Designed for golf swings'];
+                cons = ['Less comfortable for walking long distances, Limited use outside of golfing'];
+            }
+            else if ( label === 'High heels'){
+                pros = ['Fashionable, Unique design, Adds height'];
+                cons = ['Less stability, Can be uncomfortable for extended wear, Can cause foot pain'];
+            }
+            else if ( label === 'High-top shoes'){
+                pros = ['Ankle support, Stylish, Provides warmth'];
+                cons = ['Less breathability, Limited flexibility'];
+            }
+            else if ( label === 'Hiking boots'){
+                pros = [' better ankle coverage, and much stiffer midsoles'];
+                cons = ['Heavy, Less flexibility'];
+            }
+            else if ( label === 'Ice-skates shoes'){
+                pros = [' Designed for ice-skating, Provides stability, Enhances performance'];
+                cons = ['Specialized for ice-skating, Not suitable for regular use'];
+            }
+            else if ( label === 'Kitten heels'){
+                pros = ['Fashionable, Adds height, Comfortable for extended wear'];
+                cons = [' Limited height, Less suitable for athletic activities'];
+            }
+            else if ( label === 'Knee-high boots'){
+                pros = ['Stylish, Provides warmth, Versatile'];
+                cons = ['Less breathability, Limited ankle flexibility'];
+            }
+            else if ( label === 'Laced booties'){
+                pros = ['Fashionable, Versatile, Provides ankle support'];
+                cons = ['Less breathability, Requires lacing'];
+            }
+            else if ( label === 'Lita shoe'){
+                pros = ['Edgy design, Adds height, Versatile'];
+                cons = ['Less stability, Not suitable for all outfits'];
+            }
+            else if ( label === 'Loafer'){
+                pros = ['Slip-on style, Comfortable, Versatile'];
+                cons = [' Limited ankle support, Less suitable for rigorous activities'];
+            }
+            else if ( label === 'Mary Jane platforms'){
+                pros = ['Stylish, Adds height, Versatile'];
+                cons = ['Less stability, Not suitable for all outfits'];
+            }
+            else if ( label === 'Moccasin'){
+                pros = ['Comfortable, Soft and flexible, Suitable for casual wear'];
+                cons = ['Less support, Not suitable for rigorous activities'];
+            }
+            else if ( label === 'Mule shoes'){
+                pros = ['Easy to slip on and off, Fashionable, Versatile'];
+                cons = ['Less support, Limited protection for toes'];
+            }
+            else if ( label === 'Old skool'){
+                pros = ['Classic design, Versatile, Comfortable'];
+                cons = ['Limited ankle support, Less cushioning'];
+            }
+            else if ( label === 'Oxford shoe'){
+                pros = ['Classic and formal, Versatile, Suitable for business attire'];
+                cons = ['Less breathability, Less suitable for casual wear'];
+            }
+            else if ( label === 'Platform heels'){
+                pros = ['Fashionable, Adds significant height, Stylish'];
+                cons = ['Less stability, Can be uncomfortable for extended wear'];
+            }
+            else if ( label === 'Running shoes'){
+                pros = ['Excellent cushioning, Shock absorption, Designed for running'];
+                cons = ['Less stability for lateral movements, Less suitable for formal occasions'];
+            }
+            else if ( label === 'Sandal'){
+                pros = ['Breathable, Easy to slip on and off, Suitable for warm weather'];
+                cons = ['Limited protection, Less suitable for cold weather or rigorous activities'];
+            }
+            else if ( label === 'Sneakers'){
+                pros = ['Comfortable, Versatile, Suitable for everyday activities'];
+                cons = ['Less formal, Limited ankle support'];
+            }
+            else if ( label === 'Soccer shoes'){
+                pros = ['Excellent traction, Designed for soccer, Enhances performance'];
+                cons = ['Less comfortable for walking long distances, Specialized for soccer'];
+            }
+            else if ( label === 'Uggs'){
+                pros = ['Provides warmth, Comfortable, Suitable for cold weather'];
+                cons = ['Less breathability, Less suitable for warm weather'];
+            }
+            else if ( label === 'Wedges shoe'){
+                pros = [' Fashionable, Adds height, Versatile'];
+                cons = ['Less stability, Not suitable for all outfits'];
+            }
+            else if ( label === 'Wellington boots'){
+                pros = ['Waterproof, Ideal for rainy weather, Easy to clean'];
+                cons = ['Less breathability, Less suitable for warm weather'];
+            }
+            else {
+                pros = ['Not Shoe'];
+                cons = [' please try again'];
+            }
+            
+            
+            // Add more conditions for other shoe types if needed
+
+            pros.forEach(pro => {
+                const listItem = document.createElement('li');
+                listItem.textContent = pro;
+                prosList.appendChild(listItem);
+            });
+
+            cons.forEach(con => {
+                const listItem = document.createElement('li');
+                listItem.textContent = con;
+                consList.appendChild(listItem);
+            });
+        }
+
+        function clearProsAndCons() {
+            const prosList = document.getElementById('pros-list');
+            const consList = document.getElementById('cons-list');
+
+            while (prosList.firstChild) {
+                prosList.firstChild.remove();
+            }
+
+            while (consList.firstChild) {
+                consList.firstChild.remove();
+            }
+        }
+
+        const photo = document.getElementById('photo');
+        const selectedImage = document.getElementById('selected-image');
+        const results = document.getElementById('results');
+        const submitButton = document.getElementById('submit-button');
+        const clearButton = document.getElementById('clear-button');
+
+        photo.addEventListener('input', read);
+        submitButton.addEventListener('click', submit);
+        clearButton.addEventListener('click', clear);
+    </script>
+</body>
+</html>

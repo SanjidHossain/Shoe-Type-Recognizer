@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i");
+* {
+  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  padding: 20px 100px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.navigation a {
+  color: #080101;
+  position: relative;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-left: 40px;;
+  transition: all 0.3s ease;
+}
+.navigation a:hover {
+  color: #ff0707;
+  text-decoration: none;
+}
+.navigation .btnlogin-popup {
+  background:transparent;
+  color: #000000;
+  padding: 10px 20px;
+  border: #000000 3px solid;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 50px;
+}
+.navigation .btnlogin-popup:hover {
+  background: #eb0000;
+  color: #533232;
+  text-decoration: none;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  width: 400px;
+  background: transparent;
+  position: relative;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+ 
+}
+.wrapper .form-box {
+  width: 100%;
+  padding: 40px 30px;
+  box-sizing: border-box;
+}
+.form-box h2 {
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #000000;
+}
+.form-box .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid #000000; ;
+  margin: 30px 0;
+}
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #000000;
+  letter-spacing: 1px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  transform: translateY(-50%);
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
+ 
+}
+.input-box input {
+
+  width: 100%;
+  height: 100%;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #000000;
+  letter-spacing: 1px;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0 35px 0 10px;
+}
+.wrapper .form-box .remember {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  font-size: .9rem;
+  color: #000000;
+  margin: -15px 0 15px;
+  font-weight: 500;
+}
+.wrapper .form-box .remember label input {
+  accent-color: #000000;
+  margin-right: 5px;
+}
+.wrapper .form-box .remember a {
+  color: #000000;
+  text-decoration: none;
+}
+.wrapper .form-box .remember a:hover {
+  text-decoration: underline;
+}
+.wrapper .form-box .btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #000000;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgb(173, 243, 173);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+}
+.backgroundimage {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
