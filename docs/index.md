@@ -11,13 +11,12 @@ can classify 36 diffrent types of shoes for both male and female.<br/>
 ### Athletic Shoes:
    1. Basketball shoes
    2. Ballet flats
-   3. Chuck Taylor
-   4. Climbing shoes
-   5. Golf shoes 
-   6. High-tops shoes 
-   7. Ice-skates shoes
-   8. Running shoes
-   9. Soccer shoes
+   3. Climbing shoes
+   4. Golf shoes 
+   5. High-tops shoes 
+   6. Ice-skates shoes
+   7. Running shoes
+   8. Soccer shoes
 
 ### Boots:
    1. Army boots
@@ -29,12 +28,13 @@ can classify 36 diffrent types of shoes for both male and female.<br/>
    7. Wellington boots 
 
 ### Cassual Shoes:
-   1. Flip flop
-   2. Old skool
-   3. Sandal
-   4. Sneakers
-   5. Moccasin
-   6. Mule shoes
+   1. Chuck Taylor
+   2. Flip flop
+   3. Old skool
+   4. Sandal
+   5. Sneakers
+   6. Moccasin
+   7. Mule shoes
 
 
 ### Dress Shoes:
