@@ -1,4 +1,4 @@
-remote_theme: beautiful-jekyll@master
+remote_theme: daattali /beautiful-jekyll@master
 plugins: 
  - jekyll-remote-theme
 
@@ -7,5 +7,5 @@ description: An Image classification API that can recognize shoe types between 3
 
 author:
   name: Md. Sanjid Hossain
-  email: sanjid15-11888@diu.edu.bd
+  email: sanjid15-11888@diu.edu.bd 
   
