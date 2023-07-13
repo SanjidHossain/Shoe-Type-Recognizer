@@ -30,6 +30,19 @@ layout: Page
             padding: 10px;
             text-align: center;
         }
+        #category-type {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #category-label {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
 
         #results-label {
             font-weight: bold;
@@ -48,20 +61,29 @@ layout: Page
         }
 
         #pros-label,
-        #cons-label {
+        #cons-label,
+        #dist-label {
             font-weight: bold;
         }
         #pros-list,
-        #cons-list {
+        #cons-list,
+        #dist-list {
             list-style-type: disc;
             text-align: left;
             margin: 10px;
             padding-left: 20px;
         }
+        #upper {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div>
+        <div class="Upper Tittle">
+            <h1>Please Enter a Shoe Image</h1>
+        </div>
         <div class="image-box">
             <label for="photo" id="image-label">Select an image:</label>
             <br>
@@ -72,18 +94,25 @@ layout: Page
         <div id="results-box">
             <label id="results-label" for="results">Results:</label>
             <br>
-            <span id="results-text">This is </span>
+            <span id="results-text">This is a </span>
             <span id="results"></span>
+        </div>
+        <div id="category-type">
+            <label id="results-label" for="results">Category:</label>
+            <br>
+            <span id="category"></span>
         </div>
         <div id="pros-cons-box">
             <label id="pros-label" for="pros-list">Pros:</label>
             <ul id="pros-list"></ul>
             <label id="cons-label" for="cons-list">Cons:</label>
             <ul id="cons-list"></ul>
+            <label id="dist-label" for="cons-list">Distinction:</label>
+            <ul id="dist-list"></ul>
         </div>
         <div class="button-container">
-            <button id="submit-button">submit</button>
             <button id="clear-button">Clear</button>
+            <p>Please clear the query before entering new image to get single result</p>
         </div>
     </div>
 
@@ -99,6 +128,7 @@ layout: Page
             selectedImage.src = reader.result;
             results.innerText = label;
             showProsAndCons(label);
+            showCategory(label);
         }
 
         function read() {
@@ -107,171 +137,232 @@ layout: Page
             reader.readAsDataURL(photo.files[0]);
         }
 
-        function submit() {
-            read();
-        }
-
         function clear() {
             photo.value = '';
             selectedImage.src = '';
             results.innerText = '';
             clearProsAndCons();
+            clearCategory();
         }
+        
+        function showCategory(label) {
+            const categoryLabel = document.getElementById('results-label');
+            const categoryText = document.getElementById('category');
 
+            let category = '';
+
+            if (label === 'Basketball shoes' || label === 'Ballet flats' || label === 'Golf shoes' || label === 'High-tops shoes' || label === 'Ice-skates shoes'|| label === 'Running shoes' || label === 'Soccer shoes') {
+                category = 'Athletic Shoes';
+            } else if (label === 'Wellington boots' || label === 'Army boots' || label === 'Chelsea Boot' || label === 'Cowboy boots' || label === 'Hiking boots' || label === 'Knee high boots' || label === 'Uggs') {
+                category = 'Boots';
+            } else if (label === 'Chuck Taylor' || label === 'Flip flop' || label === 'Old skool' || label === 'Sandal' || label === 'Sneakers ' || label === 'Moccasin' || label === 'Mule shoes') {
+                category = 'Casual Shoes';
+            } else if (label === 'Brogues' || label === 'Derby shoes' || label === 'Dress shoe' || label === 'Loafer' || label === 'Oxford shoe') {
+                category = 'Dress shoes';
+            }
+            else if (label === 'Cone heels' || label === 'Court shoes' || label === 'High heels' || label === 'Kitten heels' || label === 'Laced booties' || label === 'Lita shoe' || label === 'Mary Jane platforms'|| label === 'Platform heels'|| label === 'Wedges shoe') {
+                category = 'Womens Heels';
+            }
+            else {
+                category = 'Unknown Category';
+            }
+
+            categoryLabel.innerText = 'Results:';
+            categoryText.innerText = category;
+        }
         function showProsAndCons(label) {
             const prosList = document.getElementById('pros-list');
             const consList = document.getElementById('cons-list');
+            const distList = document.getElementById('dist-list');
 
             let pros = [];
             let cons = [];
+            let dist = [];
 
             if (label === 'Army boots') {
                 pros = ['Durable, Sturdy design, Suitable for outdoor activities'];
                 cons = ['Heavy, Less breathable'];
+                dist = ['Army boots are designed to be durable and sturdy, and are suitable for outdoor activities.'];
             } 
             else if (label === 'Ballet flats') {
                 pros = ['Comfortable, Versatile, Elegant'];
                 cons = ['Less support, Less cushioning'];
-            } 
+                dist = ['Ballet flats are designed to be versatile, and has thin soles, so it has maximum flexibility, are suitable for casual wear.'];
+            }  
             else if (label === 'Basketball shoes'){
                 pros = ['Excellent grip, Shock absorption, Ankle support'];
                 cons = [' Bulky and Less flexible'];
+                dist  = ['Basketball shoes has lateral support or side-to-side movement that protects your foot from rolling in or out .'];
             }  
             else if ( label === 'Brogues'){
                 pros = ['Stylish, Classic design, Versatile'];
                 cons = [' Less cushioning, Not suitable for athletic activities'];
+                dist = ['Brogues are designed to be stylish and classic, and has minimal perforations on the top edge of the toe cap.'];
             }
             else if ( label === 'Chelsea Boot'){
                 pros = ['Stylish, Easy to slip on and off, Versatile'];
                 cons = ['Limited ankle support, Less suitable for rigorous activities'];
+                dist = ['Chelsea boots are close-fitting ankle boots featuring stretchy elastic side panels.'];
             }
             else if ( label === 'Chuck Taylor'){
                 pros = ['Iconic design, Versatile, Comfortable'];
                 cons = ['Limited support, Less cushioning'];
+                dist = ['Chuck Taylor has a stitched upper portion, and a toe cap and outsole usually made of rubber.'];
             }
             else if ( label === 'Climbing shoes'){
                 pros = ['Excellent grip, Precise fit, Enhanced sensitivity'];
                 cons = ['Uncomfortable for walking long distances, Not suitable for casual wear'];
+                dist = ['Typical climbing shoes have a close fit, little if any padding, and a smooth, sticky rubber sole with an extended rubber rand.'];
             }
             else if ( label === 'Cone heels'){
                 pros = ['Fashionable, Unique design, Adds height'];
                 cons = ['Less stability, Can be uncomfortable for extended wear'];
+                dist = ['the cone heel has a thick, rounded base for good ground contact and a narrow tip at the seat.'];
             }
             else if ( label === 'Court shoes'){
                 pros = ['Versatile, Suitable for formal occasions, Comfortable'];
                 cons = [' Limited support, Less cushioning'];
+                dist = ['Basic Features of Court Shoe It has an unbroken topline, and has thin soles, so it has maximum flexibility, are suitable for formal wear.'];
             }
             else if ( label === 'Cowboy boots'){
                 pros = ['Western style, Sturdy construction, Durable'];
                 cons = ['May require a break-in period, Not suitable for all outfits'];
+                dist = ['They have a high heel that is traditionally made of stacked leather, rounded to pointed toe, high shaft, and, traditionally, no lacing.'];
             }
             else if ( label === 'Derby shoes'){
                 pros = ['Classic design, Versatile, Suitable for both formal and casual wear'];
                 cons = ['Less ankle support, Limited cushioning'];
+                dist = ['Derby shoes are characterized by quarters, with shoelace eyelets that are sewn on top of the vamp. This construction method, also known as "open lacing"'];
             }
             else if ( label === 'Dress shoe'){
                 pros = ['Formal and elegant, Versatile, Suitable for special occasions'];
                 cons = [' Less comfort for long hours, Less suitable for casual wear'];
+                dist = ['Dress shoes are characterized by smooth and supple leather uppers, leather soles, and narrow sleek figure.'];
             }
             else if ( label === 'Flip flop'){
                 pros = ['Lightweight, Easy to slip on and off, Suitable for beach or poolside'];
                 cons = ['Limited support, No protection for toes'];
+                dist = ['Flip flops has a flat base, typically rubber, and a strap with three anchor points: between the big and second toes, then bifurcating to anchor on both sides of the foot.'];
             }
             else if ( label === 'Golf shoes'){
                 pros = ['Excellent traction, Stability, Designed for golf swings'];
                 cons = ['Less comfortable for walking long distances, Limited use outside of golfing'];
+                dist = ['Golf shoes are designed to be lightweight and comfortable, and has spikes on the soles for traction.'];
             }
             else if ( label === 'High heels'){
                 pros = ['Fashionable, Unique design, Adds height'];
                 cons = ['Less stability, Can be uncomfortable for extended wear, Can cause foot pain'];
+                dist = ['High heels are characterized by a heel that is raised significantly higher than the toes shoe with an upward-angled sole.'];
             }
-            else if ( label === 'High-top shoes'){
+            else if ( label === 'High-tops shoes'){
                 pros = ['Ankle support, Stylish, Provides warmth'];
                 cons = ['Less breathability, Limited flexibility'];
+                dist = ['High-tops shoes are characterized by a high shaft extending above the ankle.'];
             }
             else if ( label === 'Hiking boots'){
                 pros = [' better ankle coverage, and much stiffer midsoles'];
                 cons = ['Heavy, Less flexibility'];
+                dist = ['Hiking boots are designed to have good traction, shock absorbency, waterproofness, breathability, good foot and/or ankle support, stability, light weight, and durability.'];
             }
             else if ( label === 'Ice-skates shoes'){
                 pros = [' Designed for ice-skating, Provides stability, Enhances performance'];
                 cons = ['Specialized for ice-skating, Not suitable for regular use'];
+                dist = ['Ice-skates shoes are designed to have a blade attached to the bottom of the boot.'];
             }
             else if ( label === 'Kitten heels'){
                 pros = ['Fashionable, Adds height, Comfortable for extended wear'];
                 cons = [' Limited height, Less suitable for athletic activities'];
+                dist = ['Kitten heels are characterized by a thin, short heel that is usually 1.5 inches or less.'];
             }
-            else if ( label === 'Knee-high boots'){
+            else if ( label === 'Knee high boots'){
                 pros = ['Stylish, Provides warmth, Versatile'];
                 cons = ['Less breathability, Limited ankle flexibility'];
+                dist = ['Knee high boots are characterized by a shaft that reaches the knee.'];
             }
             else if ( label === 'Laced booties'){
                 pros = ['Fashionable, Versatile, Provides ankle support'];
                 cons = ['Less breathability, Requires lacing'];
+                dist = ['Laced booties are characterized by a shaft that reaches the ankle and lace on design.'];
             }
             else if ( label === 'Lita shoe'){
                 pros = ['Edgy design, Adds height, Versatile'];
                 cons = ['Less stability, Not suitable for all outfits'];
+                dist = ['Lita shoe is characterized by a thick platform sole and a chunky heel.'];
             }
             else if ( label === 'Loafer'){
                 pros = ['Slip-on style, Comfortable, Versatile'];
                 cons = [' Limited ankle support, Less suitable for rigorous activities'];
+                dist = ['Loafers are characterized by a low heel and no laces with slip-on shoes design.'];
             }
             else if ( label === 'Mary Jane platforms'){
                 pros = ['Stylish, Adds height, Versatile'];
                 cons = ['Less stability, Not suitable for all outfits'];
+                dist = ['Mary Jane platforms are characterized by one thin strap fastened with a buckle or button, a broad and rounded toe box.'];
             }
             else if ( label === 'Moccasin'){
                 pros = ['Comfortable, Soft and flexible, Suitable for casual wear'];
                 cons = ['Less support, Not suitable for rigorous activities'];
+                dist = ['Moccasin is a type of shoe without a heel and made from leathe.'];
             }
             else if ( label === 'Mule shoes'){
                 pros = ['Easy to slip on and off, Fashionable, Versatile'];
                 cons = ['Less support, Limited protection for toes'];
+                dist = ['Mule shoes are characterized by a backless shoe with a closed toe.'];
             }
             else if ( label === 'Old skool'){
                 pros = ['Classic design, Versatile, Comfortable'];
                 cons = ['Limited ankle support, Less cushioning'];
+                dist = ['Old skool shoes are characterized by a low top with a suede and canvas upper with a lace-up design.'];
             }
             else if ( label === 'Oxford shoe'){
                 pros = ['Classic and formal, Versatile, Suitable for business attire'];
                 cons = ['Less breathability, Less suitable for casual wear'];
+                dist = ['Oxford shoes are characterized by shoelace eyelets tabs that are attached under the vamp, a feature termed "closed lacing".'];
             }
             else if ( label === 'Platform heels'){
                 pros = ['Fashionable, Adds significant height, Stylish'];
                 cons = ['Less stability, Can be uncomfortable for extended wear'];
+                dist = ['Platform heels are characterized by a thick sole, usually in the range of 3 to 10 cm (1 to 4 in),the heel is raised significantly higher than the ball of the foot.'];
             }
             else if ( label === 'Running shoes'){
                 pros = ['Excellent cushioning, Shock absorption, Designed for running'];
                 cons = ['Less stability for lateral movements, Less suitable for formal occasions'];
+                dist = ['Running shoes are characterized by a flexible sole, appropriate tread for the running surface, and a cushioned insole.'];
             }
             else if ( label === 'Sandal'){
                 pros = ['Breathable, Easy to slip on and off, Suitable for warm weather'];
                 cons = ['Limited protection, Less suitable for cold weather or rigorous activities'];
+                dist = ['Sandals are an open type of shoe, consisting of a sole held to the wearers foot by straps going over the instep and around the ankle.'];
             }
-            else if ( label === 'Sneakers'){
+            else if ( label === 'Sneakers '){
                 pros = ['Comfortable, Versatile, Suitable for everyday activities'];
                 cons = ['Less formal, Limited ankle support'];
+                dist = ['Sneakers are characterized by a flexible sole made of rubber or synthetic material and an upper part made of leather or canvas.'];
             }
             else if ( label === 'Soccer shoes'){
                 pros = ['Excellent traction, Designed for soccer, Enhances performance'];
                 cons = ['Less comfortable for walking long distances, Specialized for soccer'];
+                dist = ['Soccer shoes are characterized by a cleat on the bottom of the shoe.'];
             }
             else if ( label === 'Uggs'){
                 pros = ['Provides warmth, Comfortable, Suitable for cold weather'];
                 cons = ['Less breathability, Less suitable for warm weather'];
+                dist = ['Uggs are characterized by a sheepskin lining and a suede exterior.'];
             }
             else if ( label === 'Wedges shoe'){
                 pros = [' Fashionable, Adds height, Versatile'];
                 cons = ['Less stability, Not suitable for all outfits'];
+                dist = ['Wedges shoe are characterized by a sole in the form of a wedge, such that one piece of material, normally rubber, serves as both the sole and the heel.'];
             }
             else if ( label === 'Wellington boots'){
                 pros = ['Waterproof, Ideal for rainy weather, Easy to clean'];
                 cons = ['Less breathability, Less suitable for warm weather'];
+                dist = ['Wellington boots are characterized by a shaft that reaches the knee and a rubber exterio and also waterproof nature.'];
             }
             else {
-                pros = ['Not Shoe'];
-                cons = [' please try again'];
+                pros = ['Could not find result'];
+                cons = [' please use a clear image of shoes'];
+                dist = ['try another image'];
             }
             
             
@@ -288,11 +379,18 @@ layout: Page
                 listItem.textContent = con;
                 consList.appendChild(listItem);
             });
+            dist.forEach(distinction => {
+                const listItem = document.createElement('li');
+                listItem.textContent = distinction;
+                distList.appendChild(listItem);
+            });
         }
 
         function clearProsAndCons() {
             const prosList = document.getElementById('pros-list');
             const consList = document.getElementById('cons-list');
+            const distList = document.getElementById('dist-list');
+            const category = document.getElementById('category');
 
             while (prosList.firstChild) {
                 prosList.firstChild.remove();
@@ -301,16 +399,20 @@ layout: Page
             while (consList.firstChild) {
                 consList.firstChild.remove();
             }
+            while (distList.firstChild) {
+                distList.firstChild.remove();
+            }
+            while (category.firstChild) {
+                category.firstChild.remove();
+            }
         }
-
+        
         const photo = document.getElementById('photo');
         const selectedImage = document.getElementById('selected-image');
         const results = document.getElementById('results');
-        const submitButton = document.getElementById('submit-button');
         const clearButton = document.getElementById('clear-button');
 
         photo.addEventListener('input', read);
-        submitButton.addEventListener('click', submit);
         clearButton.addEventListener('click', clear);
     </script>
 </body>
