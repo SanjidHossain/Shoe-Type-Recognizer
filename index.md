@@ -1,6 +1,6 @@
 ---
 title: Home
-input: Page
+input: page
 ---
 
 # An Image classification API
