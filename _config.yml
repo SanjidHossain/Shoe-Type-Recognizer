@@ -1,0 +1,11 @@
+remote_theme: beautiful-jekyll@master
+plugins: 
+ - jekyll-remote-theme
+
+tittle: Shoe Type Recognizer
+description: An Image classification API that can recognize shoe types between 36 types from any images of the shoe.
+
+author:
+  name: Md. Sanjid Hossain
+  email: sanjid15-11888@diu.edu.bd
+  
