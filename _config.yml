@@ -1,4 +1,4 @@
-remote_theme: lecoueyl / vue3-template@main
+remote_theme: lecoueyl/ vue3-template@main
 plugins: 
  - jekyll-remote-theme
 
