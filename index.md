@@ -1,13 +1,14 @@
 ---
 title: Home
-input: page
+input: Page
 ---
 
 # An Image classification API
 can classify 36 diffrent types of shoes for both male and female.<br/>
+
 ## Types of Shoes:
 
-  ### Athletic Shoes:
+## Athletic Shoes:
    1. Basketball shoes
    2. Ballet flats
    3. Chuck Taylor
@@ -18,7 +19,7 @@ can classify 36 diffrent types of shoes for both male and female.<br/>
    8. Running shoes
    9. Soccer shoes
 
-  ### Boots:
+## Boots:
    1. Army boots
    2. Chelsea Boot
    3. Cowboy boots
@@ -27,7 +28,7 @@ can classify 36 diffrent types of shoes for both male and female.<br/>
    6. Uggs
    7. Wellington boots 
 
-  ### Cassual Shoes:
+## Cassual Shoes:
    1. Flip flop
    2. Old skool
    3. Sandal
@@ -36,14 +37,14 @@ can classify 36 diffrent types of shoes for both male and female.<br/>
    6. Mule shoes
 
 
-  ### Dress Shoes:
+## Dress Shoes:
    1. Brogues
    2. Derby shoe
    3. Dress shoe
    4. Loafer
    5. Oxford shoe
 
-  ### Women's Heels:
+## Women's Heels:
    1. Cone heels
    2. Court shoes
    3. High heels
