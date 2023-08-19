@@ -1,14 +1,14 @@
 # Shoe-Type-Recognizer
 
 An Image classification Model from Data collection, cleaning, model training as well as deployment and API integration<br/>
-The final app can classify 36 diffrent types of shoes for both male and female.<br/>
+The final app can classify 36 different types of shoes for both males and females.<br/>
 [Click Here to Visit Web aplication](https://sanjidhossain.github.io/Shoe-Type-Recognizer/)<br/>
 ### The App can Provide:
  1. The Type of shoes or the name of the shoes
  2. The Category of a Shoe(Boots, Heels,Dress shoes .etc)
- 3. The App can Produce the positive sides and best feature as Pros.
- 4. The App can also produce negative side and possible problem of a shoes as Con.
- 5. The App can also provide the characteristics and key feature of each shoe as Distinction.<br/>
+ 3. The App can Produce the positive sides and best features as Pros.
+ 4. The App can also produce a negative side and possible problems of shoes as Con.
+ 5. The App can also provide the characteristics and key features of each shoe as Distinction.<br/>
     <br/>
 Here is a sample of the Final application at work.<br/>
 <p align="center">
@@ -67,13 +67,13 @@ Here is a sample of the Final application at work.<br/>
 
 # Dataset Preparation
 **Data Collection:** The data was collected by downloading from DuckDuckGo search using their term name <br/>
-**DataLoader:** Used fastai DataBlock API to set up the DataLoader where Resnet34 was used and was fine tuned multiple times. <br/>
+**DataLoader:** Used fastai DataBlock API to set up the DataLoader where Resnet34 was used and was fine-tuned multiple times. <br/>
 **Data Augmentation:** fastai provides default data augmentation which operates in GPU. <br/>
 Details can be found in `notebooks/Data_prep_for_capstone2.ipynb`
 
 # Training and Data Cleaning
-**Training:** Fine-tuned a resnet34 model for 5 epochs intially and then with 2 epochs for 4 times and got upto 89.6% accuracy. <br/>
-**Data Cleaning:** This part took the highest time. Since the collected data were from browser, there were many noises. Also, there were images that contained Animations, adds as well as there were garbage data that contains irrelevent subjects. The was cleaned and updated by using fastai library `ImageClassifierCleaner`.the data were cleaned each time after training and finetuning till the last time which was the final iteration of the model. <br/>
+**Training:** Fine-tuned a resnet34 model for 5 epochs initially and then with 2 epochs 4 times and got up to 89.6% accuracy. <br/>
+**Data Cleaning:** This part took the highest time. Since the collected data were from the browser, there were many noises. Also, there were images that contained Animations, adds as well as there were garbage data that contains irrelevant subjects. The was cleaned and updated by using fastai library `ImageClassifierCleaner`.the data were cleaned each time after training and finetuning till the last time which was the final iteration of the model. <br/>
 
 # Model Deployment
 The final model was deployed in HuggingFace Spaces using Gradio App. The implementation can be found in `deployment` folder or [here](https://huggingface.co/spaces/sanjid/Shoe-Type-Recognizer). <br/>
